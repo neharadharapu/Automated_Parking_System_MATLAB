@@ -11,18 +11,16 @@ legend off
 
 costmap.MapExtent % [x, width, y, height] in meters
 costmap.CellSize  % cell size in meters
+end
+function HelperBehavioralPlanner()
 
-scenario = drivingScenario('SampleTime',0.1','StopTime',60);
-vc = vehicle(scenario);
+data = load('routePlan.mat');
+routePlan = data.routePlan;
+
 vehicleDims      = vehicleDimensions;
 maxSteeringAngle = 35; % in degrees
 costmap.CollisionChecker.VehicleDimensions = vehicleDims;
 currentPose = [4, 12, 0]; % [x, y, theta]
-data = load('routePlan.mat');
-routePlan = data.routePlan;
-behavioralPlanner = HelperBehavioralPlanner(routePlan, maxSteeringAngle);
-end
-function HelperBehavioralPlanner(routePlan, maxSteeringAngle)
 
 % Plot vehicle at current pose
 hold on
